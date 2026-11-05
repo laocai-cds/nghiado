@@ -667,6 +667,11 @@ label.f{display:block;font-size:13px;font-weight:600;margin:14px 0 6px;color:var
 .notice .livepill b{color:#c1121f;font-weight:900;font-size:19px}
 .notice .livepill svg{color:var(--son-dd)}
 .notice .livepill .ldot{background:#1f9d4a;box-shadow:0 0 0 3px #1f9d4a33}
+/* dải thông báo bo tròn, thẳng mép với banner ảnh */
+.notice{border:2px solid #c9a227;border-radius:14px;margin-top:12px;top:8px;box-sizing:border-box}
+.notice .livepill{border-left:2px solid #c9a227}
+@media(min-width:1024px){.notice{width:calc(min(var(--wrap),100% - var(--side)) - 64px);margin-left:calc(var(--side) + (100% - var(--side) - min(var(--wrap),100% - var(--side)))/2 + 32px)}}
+@media(max-width:1023px){.notice{margin:10px 12px 0;border-radius:12px}}
 /* ===== Đăng nhập quản trị ===== */
 html:not(.is-admin) .admin-only{display:none!important}
 .admtb{width:100%;border-collapse:collapse;font-size:13.5px}
