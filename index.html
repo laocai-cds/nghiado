@@ -669,6 +669,18 @@ label.f{display:block;font-size:13px;font-weight:600;margin:14px 0 6px;color:var
 .notice .livepill .ldot{background:#1f9d4a;box-shadow:0 0 0 3px #1f9d4a33}
 /* thanh bên bo tròn, tách mép */
 @media(min-width:1024px){.bar{left:12px;top:12px;bottom:12px;width:calc(var(--side) - 24px);border-radius:18px;border:1px solid #c9a22755;box-shadow:0 10px 30px -14px #0007,inset 0 0 0 1px #ffffff10}}
+/* chân trang chuyên nghiệp */
+.fcard{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:16px 22px;border-radius:14px;background:linear-gradient(180deg,var(--son-d),var(--son-dd));border:1px solid #c9a22766;box-shadow:0 8px 22px -14px #0006;color:#f3f7e6}
+.fcard .credit{padding:0;border:0;justify-content:flex-start;gap:12px}
+.fcard .cr-ic{width:34px;height:34px;background:#ffffff1f;border:1px solid #e9cf7a99;color:#ffe36e;font-size:1rem}
+.fcard .cr-t{display:flex;flex-direction:column;gap:2px;font-size:13px}
+.fcard .cr-k{color:#e9efd2;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.fcard .cr-k::after{content:none}
+.fcard .cr-o{color:#ffe36e;font:800 15px/1.2 var(--serif);letter-spacing:.02em}
+.fcard .cr-o::before{content:none}
+.fcard .copyr{margin:0;text-align:right;font-size:12px;color:#e9efd2;padding-left:16px;border-left:1px solid #ffffff33}
+.fcard .copyr b{color:#ffe36e}
+@media(max-width:700px){.fcard{flex-direction:column;align-items:flex-start;gap:10px}.fcard .copyr{border-left:0;padding-left:0;text-align:left}}
 /* mẫu chữ & số: vàng trên xanh đậm */
 .nt-badge{background:linear-gradient(180deg,#3f7a1c,#2d5c12);color:#ffe36e;font-weight:800;font-size:11px;border-right:2px solid #c9a227}
 .nt-badge svg{color:#ffe36e}
@@ -968,7 +980,7 @@ go();document.addEventListener('DOMContentLoaded',go);
 </section>
 </main>
 
-<footer class="foot"><div class="wrap"><div class="credit"><span class="cr-ic" aria-hidden="true">★</span><div class="cr-t"><span class="cr-k">Thiết kế và phát triển</span><span class="cr-o">Hà Việt Anh</span></div></div><p class="copyr"><span aria-hidden="true">©</span> Bản quyền 2026: <b>Đảng ủy xã Nghĩa Đô</b></p></div></footer>
+<footer class="foot"><div class="wrap"><div class="fcard"><div class="credit"><span class="cr-ic" aria-hidden="true">★</span><div class="cr-t"><span class="cr-k">Thiết kế và phát triển</span><span class="cr-o">Hà Việt Anh</span></div></div><p class="copyr"><span aria-hidden="true">©</span> Bản quyền 2026 <b>Đảng ủy xã Nghĩa Đô</b></p></div></div></footer>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="back" id="ntModal" role="dialog" aria-modal="true" aria-labelledby="ntTitle">
