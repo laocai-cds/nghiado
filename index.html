@@ -1286,7 +1286,7 @@ function renderDonut(t,rate,active){
   const sc={done:0,part:0,empty:0};
   active.forEach(r=>{const c=status(r)[1];if(c==='done')sc.done++;else if(c==='partial')sc.part++;else sc.empty++});
   const mem=[
-    {l:'Đã nộp',v:t.paidCount,c:'#1e7a4c'},
+    {l:'Đã nộp',v:t.paidCount,c:'#4d7616'},
     {l:'Đã duyệt, chưa nộp',v:t.approved,c:'#c9a227'},
     {l:'Chưa duyệt hồ sơ',v:t.pending,c:'#d98a3a'},
     {l:'Chưa có hồ sơ',v:t.noRecord,c:'#b3261e'},
@@ -1296,9 +1296,9 @@ function renderDonut(t,rate,active){
   svg.setAttribute('aria-label',`Biểu đồ tròn: ${t.paidCount} trên ${t.due} đảng viên đã nộp, đạt ${pct(rate)}; ${sc.done} đơn vị hoàn thành, ${sc.part} đang thu, ${sc.empty} chưa phát sinh`);
   svg.innerHTML=`<circle cx="110" cy="110" r="94" fill="none" stroke="#eceef1" stroke-width="18"/><circle cx="110" cy="110" r="70" fill="none" stroke="#f3f4f6" stroke-width="10"/>`+
    `<circle cx="110" cy="110" r="106" fill="none" stroke="#c9a227" stroke-opacity=".45" stroke-width=".8" stroke-dasharray="1.5 4"/><circle cx="110" cy="110" r="58" fill="#f8f9fa"/>`+
-   `<g class="spin">${ring(94,18,mem)}</g><g class="spin">${ring(70,10,[{v:sc.done,c:'#1e7a4c'},{v:sc.part,c:'#c9a227'},{v:sc.empty,c:'#d9dce1'}])}</g>`;
+   `<g class="spin">${ring(94,18,mem)}</g><g class="spin">${ring(70,10,[{v:sc.done,c:'#4d7616'},{v:sc.part,c:'#c9a227'},{v:sc.empty,c:'#d9dce1'}])}</g>`;
   const rows=mem.filter(m=>m.v>0).map(m=>`<div style="--c:${m.c}"><span>${m.l}</span><b>${num(m.v)}</b></div>`).join('')||'<div style="--c:#d9dce1"><span>Chưa có số liệu</span><b>0</b></div>';
-  $('#dlegend').innerHTML=`<div class="dgroup"><p>Đảng viên, vòng ngoài</p>${rows}</div><div class="dgroup"><p>Đơn vị, vòng trong</p><div style="--c:#1e7a4c"><span>Hoàn thành</span><b>${sc.done}</b></div><div style="--c:#c9a227"><span>Đang thu</span><b>${sc.part}</b></div><div style="--c:#d9dce1"><span>Chưa phát sinh</span><b>${sc.empty}</b></div></div>`;
+  $('#dlegend').innerHTML=`<div class="dgroup"><p>Đảng viên, vòng ngoài</p>${rows}</div><div class="dgroup"><p>Đơn vị, vòng trong</p><div style="--c:#4d7616"><span>Hoàn thành</span><b>${sc.done}</b></div><div style="--c:#c9a227"><span>Đang thu</span><b>${sc.part}</b></div><div style="--c:#d9dce1"><span>Chưa phát sinh</span><b>${sc.empty}</b></div></div>`;
 }
 function growDonut(){
   $$('#donutsvg .seg').forEach(c=>{const L=Number(c.dataset.len),go=()=>{c.style.strokeDasharray=`${L} ${100-L}`};resetTo(c,'strokeDasharray','0 100');if(REDUCED)go();else requestAnimationFrame(()=>requestAnimationFrame(go))});
@@ -1350,10 +1350,10 @@ function render(){
   $('#colchart').setAttribute('aria-label',`Biểu đồ cột tiến độ thu đảng phí của ${n} đơn vị, ${done} đơn vị nộp đủ`);
   $('#colchart').innerHTML=units.map((r,i)=>{const p=Math.max(0,Math.min(1,v(r,'progress')));return `<div class="col" title="${esc(nm(r))}: ${pct(v(r,'progress'))} · ${v(r,'paidCount')}/${v(r,'due')} đảng viên đã nộp · ${money(v(r,'paid'))}"><div class="cb ${cls(r)}" data-h="${p*100}" style="--i:${i}"><i class="t3"></i><i class="s3"></i><em>${Math.round(p*100)}%</em></div></div>`}).join('');
   $('#colnames').innerHTML='';
-  $('#chartlegend').innerHTML=[['Đã hoàn thành','#1e7a4c'],['Đang thu','#b8921f'],['Chưa phát sinh','#d1d5db']].map(([l,c])=>`<span style="--c:${c}">${l}</span>`).join('');
+  $('#chartlegend').innerHTML=[['Đã hoàn thành','#4d7616'],['Đang thu','#b8921f'],['Chưa phát sinh','#d1d5db']].map(([l,c])=>`<span style="--c:${c}">${l}</span>`).join('');
 
   // split by status
-  const groups=[['Đã hoàn thành','#1e7a4c'],['Đang thu','#b8921f'],['Chưa phát sinh','#9ca3af']].map(([l,c])=>({l,c,n:0}));
+  const groups=[['Đã hoàn thành','#4d7616'],['Đang thu','#b8921f'],['Chưa phát sinh','#9ca3af']].map(([l,c])=>({l,c,n:0}));
   active.forEach(r=>{const s=status(r)[0];const g=groups.find(x=>x.l===s);if(g)g.n++});
   $('#split').setAttribute('aria-label',groups.map(g=>`${g.n} ${g.l.toLowerCase()}`).join(', '));
   $('#split').innerHTML=groups.filter(g=>g.n).map(g=>`<i style="flex:${g.n};background:${g.c}" title="${g.l}: ${g.n}"></i>`).join('');
