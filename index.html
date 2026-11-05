@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#5a0d13">
+<meta name="theme-color" content="#344c11">
 <meta name="description" content="Theo dõi tình hình thu nộp đảng phí tại Đảng bộ xã Nghĩa Đô.">
 <title>Hệ thống theo dõi thu nộp đảng phí · Đảng bộ xã Nghĩa Đô</title>
 <meta property="og:type" content="website">
@@ -28,11 +28,11 @@
 <style>
 /* =========================================================
    Đảng bộ xã Nghĩa Đô · Hệ thống theo dõi thu nộp đảng phí
-   Giao diện "Văn kiện": nền giấy ngà, thanh điều hướng đỏ son,
+   Giao diện "Văn kiện": nền giấy ngà, thanh điều hướng xanh cốm,
    chỉ vàng, chữ có chân cho tiêu đề.
    ========================================================= */
 :root{
-  --son:#b3141c;--son-d:#8c0f16;--son-dd:#650a10;--son-l:#d4262e;
+  --son:#62961d;--son-d:#4d7616;--son-dd:#38550f;--son-l:#79b32e;
   --vang:#c9a227;--vang-l:#e9cf7a;--vang-bg:#fbf4dc;
   --ngoc:#1e7a4c;--ngoc-bg:#e3f1e8;
   --ho:#b7791f;--ho-bg:#fcefd6;
@@ -45,7 +45,7 @@
   --sans:'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',sans-serif;
   --display:var(--sans);--body:var(--sans);
   --side:330px;--wrap:1240px;--r:14px;--r-s:9px;
-  --sh:0 1px 0 #fff inset,0 1px 2px #3b070c0d,0 8px 24px -16px #3b070c33;
+  --sh:0 1px 0 #fff inset,0 1px 2px #22320a0d,0 8px 24px -16px #22320a33;
   /* tên cũ giữ cho mã báo cáo */
   --lac:var(--son);--lac-d:var(--son-d);--lac-2:var(--son-l);--gold:var(--vang);--gold-d:#9c7b14;
   --paddy:var(--ngoc);--paddy-bg:var(--ngoc-bg);--amber:var(--ho);--amber-bg:var(--ho-bg);--gray:var(--xam);--gray-bg:var(--xam-bg);
@@ -55,7 +55,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{margin:0;background:var(--giay);color:var(--ink);font:14.5px/1.55 var(--sans);font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
 body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:-1;background:
   radial-gradient(900px 520px at 100% 0,#c9a2271a,transparent 70%),
-  radial-gradient(700px 500px at 0 100%,#8e1b2212,transparent 70%)}
+  radial-gradient(700px 500px at 0 100%,#53782012,transparent 70%)}
 button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--vang);outline-offset:2px}
 [hidden]{display:none!important}
@@ -95,7 +95,7 @@ a{color:var(--son)}
 
 /* ---------- nút ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--rule);background:var(--paper);border-radius:var(--r-s);padding:8px 14px;font-weight:600;font-size:13px;cursor:pointer;color:var(--ink-2);text-decoration:none;transition:background .15s,border-color .15s,box-shadow .15s}
-.btn:hover{border-color:#cbd0d6;box-shadow:0 2px 8px -4px #3b070c33}
+.btn:hover{border-color:#cbd0d6;box-shadow:0 2px 8px -4px #22320a33}
 .btn:disabled{opacity:.5;cursor:not-allowed}
 .btn.solid{background:var(--son);border-color:var(--son);color:#fff}
 .btn.solid:hover{background:var(--son-l)}
@@ -133,7 +133,7 @@ a{color:var(--son)}
 .hero{position:relative;margin-bottom:22px}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:stretch}
 .hero .wrap>div:first-child{position:relative;overflow:hidden;border-radius:var(--r);padding:30px 32px 28px;color:#fff;
-  background:linear-gradient(135deg,var(--son) 0%,var(--son-d) 62%,var(--son-dd) 100%);box-shadow:0 18px 40px -24px #3b070ccc}
+  background:linear-gradient(135deg,var(--son) 0%,var(--son-d) 62%,var(--son-dd) 100%);box-shadow:0 18px 40px -24px #22320acc}
 .hero .wrap>div:first-child::before{content:'';position:absolute;right:-110px;top:-110px;width:360px;height:360px;opacity:.16;pointer-events:none;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%23e9cf7a'%3E%3Ccircle cx='100' cy='100' r='98' stroke-width='1.2'/%3E%3Ccircle cx='100' cy='100' r='86' stroke-width='.6' stroke-dasharray='2 3'/%3E%3Ccircle cx='100' cy='100' r='72' stroke-width='1'/%3E%3Ccircle cx='100' cy='100' r='58' stroke-width='.6' stroke-dasharray='6 3'/%3E%3Ccircle cx='100' cy='100' r='44' stroke-width='1'/%3E%3C/g%3E%3Cpath fill='%23e9cf7a' d='M100 72l4.2 17.6 14.7-10.5-7.6 16.4 18 .9-16.2 7.9 12.7 12.8-17.4-4.6 1.1 18-10-15-10 15 1.1-18-17.4 4.6 12.7-12.8-16.2-7.9 18-.9-7.6-16.4 14.7 10.5z'/%3E%3C/svg%3E") center/contain no-repeat}
 .hero .wrap>div:first-child::after{content:'';position:absolute;left:32px;right:32px;bottom:0;height:3px;border-radius:3px 3px 0 0;background:linear-gradient(90deg,var(--vang),var(--vang-l),var(--vang))}
@@ -179,7 +179,7 @@ a{color:var(--son)}
 .stat strong{display:block;font:700 clamp(1.3rem,2vw,1.75rem)/1.15 var(--serif);color:var(--ink);margin:10px 0 6px;white-space:nowrap}
 .stat small{display:block;font-size:12.5px;color:var(--muted)}
 .stat small b{color:var(--k)}
-.stat.k1{--k:var(--son);--kb:#f6e3e1}
+.stat.k1{--k:var(--son);--kb:#eaf4e3}
 .stat.k2{--k:#9c7b14;--kb:var(--vang-bg)}
 .stat.k3{--k:var(--ngoc);--kb:var(--ngoc-bg)}
 .stat.k4{--k:var(--ho);--kb:var(--ho-bg)}
@@ -233,7 +233,7 @@ a{color:var(--son)}
 .mcol i{display:block;width:60%;max-width:36px;border-radius:6px 6px 0 0;background:#e2c9c6;min-height:3px;transition:height .8s cubic-bezier(.22,.7,.2,1)}
 .mcol:hover i{background:#d3a9a5}
 .mcol.cur i{background:#d7b95a}
-.mcol.sel{background:#8e1b220a;box-shadow:inset 0 0 0 1px #8e1b2226}
+.mcol.sel{background:#5378200a;box-shadow:inset 0 0 0 1px #53782026}
 .mcol.sel i{background:linear-gradient(180deg,var(--son-l),var(--son-d))}
 .mcol.sel em{color:var(--son);font-weight:700}
 .mcol.none i{background:var(--rule-2)}
@@ -255,10 +255,10 @@ a{color:var(--son)}
 .sub{font:600 10.5px var(--sans);letter-spacing:.12em;text-transform:uppercase;margin:0 0 4px;color:var(--muted);padding-top:14px;border-top:1px solid var(--rule-2)}
 .chase{display:grid;grid-template-columns:24px minmax(0,1fr) auto;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--rule-2);font-size:13px}
 .sub+#chase .chase:first-child{border-top:0}
-.chase .rk{font:700 11px/24px var(--sans);text-align:center;width:24px;height:24px;min-width:0;border-radius:50%;background:#f6e3e1;color:var(--son);font-style:normal;box-shadow:none}
+.chase .rk{font:700 11px/24px var(--sans);text-align:center;width:24px;height:24px;min-width:0;border-radius:50%;background:#eaf4e3;color:var(--son);font-style:normal;box-shadow:none}
 .chase .cm{min-width:0}.chase .cm span{display:block;line-height:1.3;font-weight:500}
 .chase .bar2{height:3px;border-radius:3px;background:var(--rule-2);margin-top:6px;overflow:hidden}
-.chase .bar2 i{display:block;height:100%;background:linear-gradient(90deg,#d98a85,var(--son));border-radius:3px}
+.chase .bar2 i{display:block;height:100%;background:linear-gradient(90deg,#acd38b,var(--son));border-radius:3px}
 .chase .cc{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end;max-width:360px}
 .chase u{text-decoration:none;font-size:11.5px;font-weight:600;padding:2px 9px;border-radius:20px;white-space:nowrap}
 .chase u.c1{background:var(--do-bg);color:var(--do)}.chase u.c2{background:var(--ho-bg);color:#8a5a12}.chase u.c3{background:#e7eef6;color:#2b4d74}
@@ -440,11 +440,11 @@ label.f{display:block;font-size:13px;font-weight:600;margin:14px 0 6px;color:var
   .brand{flex:1;min-width:0;padding:0;margin:0;border:0;gap:10px}
   .seal{width:38px;height:38px;border-radius:10px}
   .brand b{font-size:13.5px}
-  .tabs{position:fixed;left:0;right:0;bottom:0;z-index:40;flex-direction:row;gap:0;background:#fff;border-top:1px solid var(--rule);box-shadow:0 -8px 24px -16px #3b070c55;padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+  .tabs{position:fixed;left:0;right:0;bottom:0;z-index:40;flex-direction:row;gap:0;background:#fff;border-top:1px solid var(--rule);box-shadow:0 -8px 24px -16px #22320a55;padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
   .tabs::before{display:none}
   .tab{flex:1;flex-direction:column;gap:3px;justify-content:center;text-align:center;padding:7px 4px;color:var(--muted);font-size:11.5px;border-radius:10px}
   .tab:hover{background:var(--giay);color:var(--ink)}
-  .tab[aria-current=page]{background:#8e1b220d;color:var(--son);box-shadow:none}
+  .tab[aria-current=page]{background:#5378200d;color:var(--son);box-shadow:none}
   .tab[aria-current=page]::before{left:30%;right:30%;top:-6px;bottom:auto;width:auto;height:3px;border-radius:0 0 3px 3px;background:var(--son)}
   .tab[aria-current=page] svg{color:var(--son)}
   .barright{margin:0;flex-direction:row;gap:6px}
@@ -622,10 +622,10 @@ label.f{display:block;font-size:13px;font-weight:600;margin:14px 0 6px;color:var
 /* ảnh phong cảnh dưới dải thông báo */
 .scenic-box{margin-left:var(--side);padding-top:24px}
 .scenic{position:relative;margin:0;height:clamp(150px,17vw,280px);overflow:hidden;background:var(--son-d);border-radius:var(--r);box-shadow:var(--sh)}
-.scenic img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 64%}
-.scenic::after{content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(180deg,rgba(0,0,0,0) 65%,rgba(60,6,10,.28) 100%)}
+.scenic img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 52%}
+.scenic::after{content:'';position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(180deg,rgba(0,0,0,0) 65%,rgba(33,50,9,.28) 100%)}
 .scenic figcaption{position:absolute;right:14px;bottom:10px;z-index:1;font:500 11px var(--sans);color:#fff;opacity:.9;text-shadow:0 1px 3px #000c}
-@media(max-width:760px){.scenic-box{padding-top:14px}.scenic{height:120px}.scenic img{object-position:50% 62%;transform:scale(1.4);transform-origin:55% 75%}.scenic figcaption{font-size:10px;right:10px;bottom:7px}}
+@media(max-width:760px){.scenic-box{padding-top:14px}.scenic{height:120px}.scenic img{object-position:50% 52%}.scenic figcaption{font-size:10px;right:10px;bottom:7px}}
 @media print{.scenic-box{display:none}}
 /* Đang online + Tổng truy cập: góc phải dải thông báo */
 .notice .livepill{flex:none;display:flex;align-items:stretch;gap:0;padding:0;margin:0;border:0;border-left:1px solid var(--rule);border-radius:0;background:linear-gradient(180deg,#fff,#fbfbfc);color:var(--ink);white-space:nowrap}
@@ -687,7 +687,7 @@ window.applyTheme=function(id){
   var T=THEMES.filter(function(x){return x.id===id})[0];if(!T)return;
   prep();window.THEME_CUR=id;
   styles().forEach(function(e){var o=e.__o;if(T.h===null){if(e.textContent!==o)e.textContent=o}else{e.textContent=conv(o,T)}})};
-window.themeBase=function(){prep();var m,o=(styles().map(function(e){return e.__o}).join('')),r=[];m=o.match(/--(?:son|lac)\s*:\s*(#[0-9a-fA-F]{6})/);r.push(m?m[1]:'#b3141c');m=o.match(/--(?:son-d|lac-d)\s*:\s*(#[0-9a-fA-F]{6})/);r.push(m?m[1]:'#8c0f16');m=o.match(/--(?:vang|gold)\s*:\s*(#[0-9a-fA-F]{6})/);r.push(m?m[1]:'#c9a227');return r};
+window.themeBase=function(){prep();var m,o=(styles().map(function(e){return e.__o}).join('')),r=[];m=o.match(/--(?:son|lac)\s*:\s*(#[0-9a-fA-F]{6})/);r.push(m?m[1]:'#62961d');m=o.match(/--(?:son-d|lac-d)\s*:\s*(#[0-9a-fA-F]{6})/);r.push(m?m[1]:'#4d7616');m=o.match(/--(?:vang|gold)\s*:\s*(#[0-9a-fA-F]{6})/);r.push(m?m[1]:'#c9a227');return r};
 var sv=null;try{sv=localStorage.getItem(K)}catch(e){}
 function go(){if(sv&&sv!=='mac-dinh')window.applyTheme(sv)}
 go();document.addEventListener('DOMContentLoaded',go);
@@ -1141,7 +1141,7 @@ function renderMonthly(){
   const prev=[...S].filter(x=>x.m<sel.m&&x.has).pop();
   const upto=S.filter(x=>x.m<=sel.m).reduce((a,x)=>a+x.v,0);
   let cmp='—',cc='';if(sel.has&&prev&&prev.v>0){const d=(sel.v-prev.v)/prev.v*100;cmp=(d>=0?'▲ +':'▼ ')+d.toFixed(1).replace('.',',')+'%';cc=d>=0?'up':'dn'}
-  $('#monthKpi').innerHTML=`<div style="--c:#d99a06"><small>Thu trong tháng ${sel.m}/${y}</small><b>${sel.has?money(sel.v):'Chưa có số liệu'}</b></div><div style="--c:#2f7d4f"><small>So với tháng trước${prev?' (T'+prev.m+')':''}</small><b class="${cc}">${cmp}</b></div><div style="--c:#c8282f"><small>Lũy kế từ đầu năm đến hết T${sel.m}</small><b>${money(upto)}</b></div>`;
+  $('#monthKpi').innerHTML=`<div style="--c:#d99a06"><small>Thu trong tháng ${sel.m}/${y}</small><b>${sel.has?money(sel.v):'Chưa có số liệu'}</b></div><div style="--c:#2f7d4f"><small>So với tháng trước${prev?' (T'+prev.m+')':''}</small><b class="${cc}">${cmp}</b></div><div style="--c:#73a92f"><small>Lũy kế từ đầu năm đến hết T${sel.m}</small><b>${money(upto)}</b></div>`;
   const yTot=S.reduce((a,x)=>a+x.v,0),ly=monthly[(y-1)+'-'+String(sel.m).padStart(2,'0')];
   $('#monthNote').textContent='Chọn năm, tháng ở góc phải hoặc bấm vào cột. Mỗi cột là số đã nộp của kỳ tháng đó; lũy kế = cộng các tháng từ T1. Cả năm '+y+': '+money(yTot)+(ly?' · Cùng kỳ T'+sel.m+'/'+(y-1)+': '+money(ly.cum):'')+'. Tháng nào chưa có cột: dùng nút API chọn tháng đó để lấy bổ sung.';
 }
@@ -1495,11 +1495,11 @@ body{font:14px/1.5 "Noto Serif","Times New Roman",Times,serif;color:#1a1a1a;back
 .top .l{flex:1;text-align:center;font-weight:700;font-size:13px}
 .top .r{flex:1.1;text-align:center}.top .r b{display:inline-block;font-size:16px;padding-bottom:4px;border-bottom:1px solid #333}.top .r i{display:block;margin-top:10px;font-size:14px}
 .tt{text-align:center;margin:26px 0 8px}.tt h1{font-size:18px;margin:0}.tt h2{font-size:15px;margin:2px 0}.tt .src{font-style:italic;color:#555;font-size:12.5px;margin-top:6px}
-h3{color:#8f1018;font-size:15px;text-transform:uppercase;margin:20px 0 6px}
+h3{color:#4f7817;font-size:15px;text-transform:uppercase;margin:20px 0 6px}
 p{margin:0 0 8px;text-align:justify;text-indent:28px}
 .cap{font-weight:700;margin:12px 0 4px;font-size:13.5px;text-indent:0;break-after:avoid;page-break-after:avoid}
 table{border-collapse:collapse;width:100%;font-size:12.5px;margin-bottom:10px}
-th{background:#8f1018;color:#fff;padding:5px 6px;border:1px solid #c9a0a3;text-align:center}
+th{background:#4f7817;color:#fff;padding:5px 6px;border:1px solid #c9a0a3;text-align:center}
 td{border:1px solid #c9ccd2;padding:3px 7px}tr:nth-child(even) td{background:#f6f7f9}
 td.n,td.c{text-align:center}
 tr{page-break-inside:avoid}
@@ -1546,7 +1546,7 @@ function reportYearHTML(y){/* báo cáo cả năm: tổng hợp các tháng + k�
   const td=s=>'<td class="c">'+s+'</td>';
   const t1=M.filter(x=>x.m<=Math.max(last,1)).map(x=>'<tr>'+td('Tháng '+x.m)+(x.has?td(x.due==null?'—':fm(x.due))+td(x.pd==null?'—':fm(x.pd))+td(x.due?pc(x.pd/x.due):'—')+'<td class="n">'+fm(x.money)+'</td><td class="n">'+fm(x.cum)+'</td>':'<td class="c" colspan="5">Chưa có số liệu</td>')+'</tr>').join('');
   const t2=UL.map((o,i)=>'<tr>'+td(i+1)+'<td>'+esc(o.name)+'</td>'+td(o.done+'/'+o.months)+'<td class="n">'+fm(o.paid)+'</td></tr>').join('');
-  const css='@page{size:A4;margin:18mm 16mm}body{font:14px/1.5 "Noto Serif","Times New Roman",Times,serif;color:#1a1a1a;background:#fff;margin:0 auto;padding:22px 30px;max-width:780px}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}.top .l{flex:1;text-align:center;font-weight:700;font-size:13px}.top .r{flex:1.1;text-align:center}.top .r b{display:inline-block;font-size:16px;padding-bottom:4px;border-bottom:1px solid #333}.top .r i{display:block;margin-top:10px;font-size:14px}.tt{text-align:center;margin:26px 0 8px}.tt h1{font-size:18px;margin:0}.tt h2{font-size:15px;margin:2px 0}.tt .src{font-style:italic;color:#555;font-size:12.5px;margin-top:6px}h3{color:#8f1018;font-size:15px;text-transform:uppercase;margin:20px 0 6px}p{margin:0 0 8px;text-align:justify;text-indent:28px}.cap{font-weight:700;margin:12px 0 4px;font-size:13.5px;text-indent:0;break-after:avoid;page-break-after:avoid}table{border-collapse:collapse;width:100%;font-size:12.5px;margin-bottom:10px}th{background:#8f1018;color:#fff;padding:5px 6px;border:1px solid #c9a0a3;text-align:center}td{border:1px solid #c9ccd2;padding:3px 7px}tr:nth-child(even) td{background:#f6f7f9}td.c{text-align:center}td.n{text-align:right}tr{page-break-inside:avoid}.ft{display:flex;justify-content:space-between;margin-top:26px;page-break-inside:avoid}.ft .nn{font-size:13px}.ft .nn u{font-size:15px}.ft .sg{width:40%;text-align:center;font-weight:700}';
+  const css='@page{size:A4;margin:18mm 16mm}body{font:14px/1.5 "Noto Serif","Times New Roman",Times,serif;color:#1a1a1a;background:#fff;margin:0 auto;padding:22px 30px;max-width:780px}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}.top .l{flex:1;text-align:center;font-weight:700;font-size:13px}.top .r{flex:1.1;text-align:center}.top .r b{display:inline-block;font-size:16px;padding-bottom:4px;border-bottom:1px solid #333}.top .r i{display:block;margin-top:10px;font-size:14px}.tt{text-align:center;margin:26px 0 8px}.tt h1{font-size:18px;margin:0}.tt h2{font-size:15px;margin:2px 0}.tt .src{font-style:italic;color:#555;font-size:12.5px;margin-top:6px}h3{color:#4f7817;font-size:15px;text-transform:uppercase;margin:20px 0 6px}p{margin:0 0 8px;text-align:justify;text-indent:28px}.cap{font-weight:700;margin:12px 0 4px;font-size:13.5px;text-indent:0;break-after:avoid;page-break-after:avoid}table{border-collapse:collapse;width:100%;font-size:12.5px;margin-bottom:10px}th{background:#4f7817;color:#fff;padding:5px 6px;border:1px solid #c9a0a3;text-align:center}td{border:1px solid #c9ccd2;padding:3px 7px}tr:nth-child(even) td{background:#f6f7f9}td.c{text-align:center}td.n{text-align:right}tr{page-break-inside:avoid}.ft{display:flex;justify-content:space-between;margin-top:26px;page-break-inside:avoid}.ft .nn{font-size:13px}.ft .nn u{font-size:15px}.ft .sg{width:40%;text-align:center;font-weight:700}';
   return '<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Báo cáo thu nộp đảng phí năm '+y+'</title><style>'+css+'</style></head><body>'+
   '<div class="top"><div class="l">ĐẢNG BỘ XÃ NGHĨA ĐÔ<br>*</div><div class="r"><b>ĐẢNG CỘNG SẢN VIỆT NAM</b><i>Nghĩa Đô, '+dateStr+'</i></div></div>'+
   '<div class="tt"><h1>BÁO CÁO</h1><h2>tình hình thu nộp đảng phí năm '+y+'</h2><div>-----</div><div class="src">Nguồn số liệu: bảng theo dõi thu nộp đảng phí trên môi trường điện tử (kỳ báo cáo: năm '+y+(last?', từ tháng 1 đến hết tháng '+last:'')+')</div></div>'+
@@ -2037,7 +2037,7 @@ const FB_CFG=null;/* TODO: dán cấu hình Firebase Realtime Database của Ngh
 #unit-news .un-date small{font:700 9.5px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--son)}
 #unit-news .un-body{min-width:0;flex:1}
 #unit-news .un-title{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;font:600 14.5px/1.45 var(--sans);color:#202936;transition:color .15s}
-#unit-news .un-sum{margin:4px 0 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:13px;line-height:1.5;color:var(--muted)}#unit-news .un-item.lead .un-sum{-webkit-line-clamp:3;font-size:13.5px}#unit-news .un-moreWrap{display:flex;justify-content:center;padding:4px 12px 16px}#unit-news .un-morebtn{display:inline-flex;align-items:center;gap:6px;padding:9px 20px;border:1px solid var(--rule);border-radius:999px;background:#fff;color:var(--son);font:700 13px var(--sans);cursor:pointer;transition:border-color .15s,background .15s}#unit-news .un-morebtn:hover{border-color:var(--son);background:#fff8f8}#unit-news .un-morebtn svg{transition:transform .2s}#unit-news .un-morebtn[aria-expanded=true] svg{transform:rotate(180deg)}#unit-news .un-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-top:7px;font-size:12px;color:var(--muted)}
+#unit-news .un-sum{margin:4px 0 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:13px;line-height:1.5;color:var(--muted)}#unit-news .un-item.lead .un-sum{-webkit-line-clamp:3;font-size:13.5px}#unit-news .un-moreWrap{display:flex;justify-content:center;padding:4px 12px 16px}#unit-news .un-morebtn{display:inline-flex;align-items:center;gap:6px;padding:9px 20px;border:1px solid var(--rule);border-radius:999px;background:#fff;color:var(--son);font:700 13px var(--sans);cursor:pointer;transition:border-color .15s,background .15s}#unit-news .un-morebtn:hover{border-color:var(--son);background:#fcfef9}#unit-news .un-morebtn svg{transition:transform .2s}#unit-news .un-morebtn[aria-expanded=true] svg{transform:rotate(180deg)}#unit-news .un-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-top:7px;font-size:12px;color:var(--muted)}
 #unit-news .un-src{padding:2px 9px;border-radius:999px;background:var(--vang-bg);color:#7a5a0a;font-weight:700;font-size:11px}
 #unit-news .un-new{padding:2px 8px;border-radius:999px;background:var(--son);color:#fff;font-weight:800;font-size:10.5px;letter-spacing:.04em}
 #unit-news .un-item.lead{grid-column:1/-1}
@@ -2067,13 +2067,13 @@ const FB_CFG=null;/* TODO: dán cấu hình Firebase Realtime Database của Ngh
 #un-modal .um-body{padding:16px 20px 20px;display:grid;gap:18px}
 #un-modal .um-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
 #un-modal .um-k{padding:11px 13px;border:1px solid #e5e7eb;border-radius:11px;background:#fafafa}
-#un-modal .um-k b{display:block;font:800 21px/1.2 var(--sans,system-ui);color:var(--son,#b3141c)}
+#un-modal .um-k b{display:block;font:800 21px/1.2 var(--sans,system-ui);color:var(--son,#62961d)}
 #un-modal .um-k span{display:block;margin-top:2px;font-size:12px;color:#6b7280}
 #un-modal h4{margin:0 0 8px;font:800 11px var(--sans,system-ui);letter-spacing:.1em;text-transform:uppercase;color:#6b7280}
 #un-modal .um-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 #un-modal ol{margin:0;padding:0;list-style:none;display:grid;gap:6px}
 #un-modal li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;font-size:13px}
-#un-modal li i{display:block;height:5px;margin-top:3px;border-radius:3px;background:var(--son,#b3141c);opacity:.75}
+#un-modal li i{display:block;height:5px;margin-top:3px;border-radius:3px;background:var(--son,#62961d);opacity:.75}
 #un-modal li em{font-style:normal;font-weight:700;font-variant-numeric:tabular-nums}
 #un-modal .um-sub{margin:0 0 8px;font-size:12.5px;color:#374151}
 #un-modal .um-today{margin:0;padding:0;list-style:none;display:grid;gap:2px}
@@ -2403,13 +2403,13 @@ document.addEventListener('keydown',function(e){const o=ov();if(e.key==='Escape'
 .scgoal .gt{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13.5px;margin-bottom:8px}
 .scgoal .gb{height:12px;border-radius:99px;background:#e6e9ef;position:relative;overflow:hidden}
 .scgoal .gb i{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:linear-gradient(90deg,#1e9e5a,#34c27a)}
-.scgoal .gb em{position:absolute;top:-2px;bottom:-2px;width:3px;background:#b3141c}
+.scgoal .gb em{position:absolute;top:-2px;bottom:-2px;width:3px;background:#62961d}
 .scgoal.low .gb i{background:linear-gradient(90deg,#d97706,#f5a524)}
 .scov{position:fixed;inset:0;z-index:9999;background:#0008;display:flex;align-items:center;justify-content:center;padding:18px}
-.scov .bx{background:#fff;color:#1b2430;max-width:520px;width:100%;border-radius:16px;padding:22px 22px 18px;box-shadow:0 20px 60px -10px #0007;border-top:6px solid var(--son,#b3141c)}
+.scov .bx{background:#fff;color:#1b2430;max-width:520px;width:100%;border-radius:16px;padding:22px 22px 18px;box-shadow:0 20px 60px -10px #0007;border-top:6px solid var(--son,#62961d)}
 .scov .bx h3{margin:0 0 10px;font-size:17px}
 .scov .bx p{margin:0 0 16px;white-space:pre-wrap;line-height:1.55;font-size:14.5px}
-.scov .bx button{border:0;border-radius:9px;padding:10px 20px;background:var(--son,#b3141c);color:#fff;font:600 14px inherit;font-family:inherit;cursor:pointer}
+.scov .bx button{border:0;border-radius:9px;padding:10px 20px;background:var(--son,#62961d);color:#fff;font:600 14px inherit;font-family:inherit;cursor:pointer}
 #scPanel .scr{display:grid;grid-template-columns:150px 1fr;gap:8px 12px;align-items:center;margin:8px 0}
 #scPanel .scr label{font-size:13px;color:var(--muted,#5b6675)}
 #scPanel input[type=text],#scPanel input[type=date],#scPanel input[type=number],#scPanel textarea{width:100%;box-sizing:border-box;padding:8px 10px;border:1px solid var(--rule,#cfd6e0);border-radius:8px;font:inherit}
@@ -2456,7 +2456,7 @@ function applyGoal(){let el=g('scGoal');const gl=cfg.goal;
   const ov=g('overview');if(!ov)return;
   if(!el){el=document.createElement('div');el.id='scGoal';el.className='scgoal';ov.insertBefore(el,ov.firstChild)}
   const cur=overall()*100,tg=Number(gl.pct)||100;let left='';
-  if(gl.date){const d=Math.ceil((new Date(gl.date+'T23:59:59')-new Date())/864e5);left=d>=0?' · còn <b>'+d+'</b> ngày (hạn '+gl.date.split('-').reverse().join('/')+')':' · <b style="color:#b3141c">đã quá hạn '+(-d)+' ngày</b>'}
+  if(gl.date){const d=Math.ceil((new Date(gl.date+'T23:59:59')-new Date())/864e5);left=d>=0?' · còn <b>'+d+'</b> ngày (hạn '+gl.date.split('-').reverse().join('/')+')':' · <b style="color:#62961d">đã quá hạn '+(-d)+' ngày</b>'}
   el.className='scgoal'+(cur<tg*0.8?' low':'');
   el.innerHTML='<div class="gt"><span>🎯 Mục tiêu: <b>'+tg+'%</b> đảng viên nộp đảng phí'+left+'</span><span>Hiện đạt <b>'+cur.toFixed(1).replace('.',',')+'%</b>'+(cur>=tg?' ✅':' · còn thiếu '+(tg-cur).toFixed(1).replace('.',',')+' điểm %')+'</span></div><div class="gb"><i style="width:'+Math.min(100,cur)+'%"></i><em style="left:calc('+Math.min(100,tg)+'% - 1px)"></em></div>'}
 function applyNotice(){const n=cfg.notice;if(!n.on||!n.text.trim())return;if(n.until&&today()>n.until)return;
@@ -2570,7 +2570,7 @@ if(typeof admApply==='function'){const o=admApply;admApply=async function(a,m){l
 .admtabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 18px;padding:6px;border:1px solid var(--rule,#e3e7ee);border-radius:12px;background:var(--paper,#fff);position:sticky;top:8px;z-index:5}
 .admtabs button{flex:1 1 auto;display:inline-flex;align-items:center;justify-content:center;gap:7px;border:0;background:transparent;padding:10px 14px;border-radius:9px;font:600 13.5px/1.2 inherit;font-family:inherit;color:var(--muted,#5b6675);cursor:pointer;white-space:nowrap}
 .admtabs button:hover{background:var(--giay,#f3f5f8);color:var(--ink,#111827)}
-.admtabs button[aria-selected=true]{background:var(--son,var(--lac,#b3141c));color:#fff;box-shadow:0 3px 10px -4px #00000055}
+.admtabs button[aria-selected=true]{background:var(--son,var(--lac,#62961d));color:#fff;box-shadow:0 3px 10px -4px #00000055}
 .admtabs .ct{font-size:11px;opacity:.85}
 .admtabs small{display:block;font-weight:500;font-size:11px;opacity:.8}
 @media(max-width:700px){.admtabs button{flex:1 1 45%;padding:9px 8px;font-size:12.5px}.admtabs small{display:none}}
