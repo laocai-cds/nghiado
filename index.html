@@ -1098,7 +1098,7 @@ function applySheet(d){
   if(!d||!d.ok||!Array.isArray(d.headers)||!Array.isArray(d.rows))return 0;
   const M=matchUnits(d.headers,d.rows);if(!M)return 0;const next=M.next,hit=M.hit;
   liveUnits=next;applyView();
-  if(d.lastSync){const t=new Date(d.lastSync);if(!isNaN(t)){const p=n=>String(n).padStart(2,'0');dataStamp=`${p(t.getDate())}/${p(t.getMonth()+1)}/${t.getFullYear()} ${p(t.getHours())}:${p(t.getMinutes())}`}}
+  {const t=new Date(d.lastSync||d.t||Date.now());if(!isNaN(t)){const p=n=>String(n).padStart(2,'0');dataStamp=`${p(t.getDate())}/${p(t.getMonth()+1)}/${t.getFullYear()} ${p(t.getHours())}:${p(t.getMinutes())}`}}
   return hit;
 }
 function staleNote(){const n=$('#loadNote');if(!n||!liveStale)return;n.className='loadnote warn';n.textContent='Chưa đồng bộ số liệu kỳ tháng '+(new Date().getMonth()+1)+' — đang hiển thị số liệu kỳ trước. Số liệu mới sẽ tự cập nhật sau khi đồng bộ.';n.hidden=false}
@@ -1204,7 +1204,7 @@ function start(){
   try{$('#endpoint').value=localStorage.getItem('nd_endpoint')||'';$('#syncToken').value=localStorage.getItem('nd_token')||''}catch(e){}
   const hasEp=!!sheetEndpoint();let cached=null;
   try{cached=JSON.parse(localStorage.getItem('nd_cache')||'null')}catch(_){}
-  if(hasEp&&cached&&Array.isArray(cached.headers)&&applySheet({ok:true,headers:cached.headers,rows:cached.rows,lastSync:cached.lastSync})){dataSrc='cache'}
+  if(hasEp&&cached&&Array.isArray(cached.headers)&&applySheet({ok:true,headers:cached.headers,rows:cached.rows,lastSync:cached.lastSync,t:cached.t})){dataSrc='cache'}
   else{dataSrc=hasEp?'loading':'backup';if(hasEp)setLoading(true);else showBackupNote(true)}
   render();
   const guard=dataSrc==='loading'?setTimeout(()=>{if(dataSrc==='loading'){dataSrc='backup';setLoading(false);showBackupNote(true);render()}},10000):0;
