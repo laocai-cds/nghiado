@@ -291,6 +291,17 @@ tbody tr:last-child td{border-bottom:0}
 tbody tr.row:hover{background:#f8f9fa}
 td.n,th.n{text-align:right;white-space:nowrap}
 .uname{font-weight:600;color:var(--ink)}
+@media(min-width:761px){
+.tw table:not(.admtb):not(.logtb){width:100%;table-layout:auto}
+#tbody{font-size:12.5px}
+.tw th{padding:9px 6px;letter-spacing:.04em;font-size:10px;white-space:normal;line-height:1.25;vertical-align:bottom}
+.tw td{padding:8px 6px;font-size:12.5px}
+.tw td.uname{min-width:150px}
+.tw td.n,.tw th.n{white-space:nowrap}
+.tw .pbar{min-width:70px;gap:6px}
+.tw .pbar b{min-width:42px;font-size:12px}
+.tw .pill{font-size:11px;padding:2px 8px;white-space:nowrap}
+}
 td.pc b{color:var(--ngoc)}tbody tr.row.empty td.pc b{color:var(--do)}
 td.mny b{color:var(--ink);font-weight:700}
 td.amb{color:var(--ho);font-weight:700}td.red{color:var(--do);font-weight:700}td.zero{color:#c4c8ce}
