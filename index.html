@@ -34,7 +34,7 @@
 :root{
   --son:#62961d;--son-d:#4d7616;--son-dd:#38550f;--son-l:#79b32e;
   --vang:#c9a227;--vang-l:#e9cf7a;--vang-bg:#fbf4dc;
-  --ngoc:#1e7a4c;--ngoc-bg:#e3f1e8;
+  --ngoc:#4d7616;--ngoc-bg:#eaf4e3;
   --ho:#b7791f;--ho-bg:#fcefd6;
   --do:#b3261e;--do-bg:#f9e1df;
   --xam:#8a8b8f;--xam-bg:#eff0f2;
@@ -89,8 +89,8 @@ a{color:var(--son)}
 .livepill{display:flex;align-items:center;gap:7px;justify-content:center;padding:9px 12px;border-radius:10px;background:#00000026;border:1px solid #ffffff14;color:#fff;font-size:12.5px;white-space:nowrap}
 .livepill b{font-weight:700}.livepill small{color:#f3e6d6a6;font-size:11.5px}
 .livepill i{width:1px;height:14px;background:#ffffff33;margin:0 3px}
-.ldot{width:8px;height:8px;border-radius:50%;background:#3ecf7d;box-shadow:0 0 0 0 #3ecf7d99;animation:lpulse 1.8s infinite;flex:none}
-@keyframes lpulse{0%{box-shadow:0 0 0 0 #3ecf7d99}70%{box-shadow:0 0 0 8px #3ecf7d00}100%{box-shadow:0 0 0 0 #3ecf7d00}}
+.ldot{width:8px;height:8px;border-radius:50%;background:#a6d15a;box-shadow:0 0 0 0 #a6d15a99;animation:lpulse 1.8s infinite;flex:none}
+@keyframes lpulse{0%{box-shadow:0 0 0 0 #a6d15a99}70%{box-shadow:0 0 0 8px #a6d15a00}100%{box-shadow:0 0 0 0 #a6d15a00}}
 .notice,main,.livebar,.foot,#viewBanner{margin-left:var(--side)}
 
 /* ---------- nút ---------- */
@@ -213,7 +213,7 @@ a{color:var(--son)}
 .cb{position:relative;width:62%;max-width:24px;height:0;border-radius:6px 6px 0 0;transition:height .8s cubic-bezier(.22,.7,.2,1)}
 .cb .t3,.cb .s3{display:none}
 .cb em{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);padding-bottom:6px;font:600 10.5px/1 var(--sans);font-style:normal;color:var(--muted);white-space:nowrap}
-.cb.complete{background:linear-gradient(180deg,#2f9a63,var(--ngoc))}
+.cb.complete{background:linear-gradient(180deg,#79b32e,var(--ngoc))}
 .cb.partial{background:linear-gradient(180deg,#dcb84a,#a8841a)}
 .cb.empty{background:#d1d5db;min-height:3px}
 .legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12.5px;color:var(--muted);margin-bottom:22px}
@@ -611,7 +611,7 @@ label.f{display:block;font-size:13px;font-weight:600;margin:14px 0 6px;color:var
 .fn-bar i{display:block;height:100%;width:0;border-radius:7px;background:linear-gradient(90deg,var(--son-d),var(--son-l));transition:width 1s cubic-bezier(.22,.7,.2,1)}
 .fn-row.s2 .fn-bar i{background:linear-gradient(90deg,#b8641a,#e39a3c)}
 .fn-row.s3 .fn-bar i{background:linear-gradient(90deg,#a8841a,#dcb84a)}
-.fn-row.s4 .fn-bar i{background:linear-gradient(90deg,#16683f,#2f9a63)}
+.fn-row.s4 .fn-bar i{background:linear-gradient(90deg,#4d7616,#79b32e)}
 .fn-val{text-align:right;white-space:nowrap}
 .fn-val b{font:700 16px var(--serif);color:var(--ink)}
 .fn-val small{display:block;font-size:11px;color:var(--muted)}
@@ -623,7 +623,7 @@ label.f{display:block;font-size:13px;font-weight:600;margin:14px 0 6px;color:var
 .mr-big strong{font:700 2.6rem/1 var(--serif);color:var(--ngoc)}
 .mr-big span{font-size:12.5px;color:var(--muted)}
 .mr-track{height:12px;border-radius:12px;background:var(--rule-2);overflow:hidden;margin:16px 0 18px}
-.mr-track i{display:block;height:100%;width:0;border-radius:12px;background:linear-gradient(90deg,#16683f,#2f9a63);transition:width 1s cubic-bezier(.22,.7,.2,1)}
+.mr-track i{display:block;height:100%;width:0;border-radius:12px;background:linear-gradient(90deg,#4d7616,#79b32e);transition:width 1s cubic-bezier(.22,.7,.2,1)}
 .mr-list{display:grid;gap:0}
 .mr-list div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px dashed var(--rule-2);font-size:13px}
 .mr-list div b{font-weight:700;white-space:nowrap}
@@ -646,7 +646,7 @@ label.f{display:block;font-size:13px;font-weight:600;margin:14px 0 6px;color:var
 .notice .livepill small{font:600 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .notice .livepill b{font:700 15px/1 var(--serif);color:var(--son-d);font-variant-numeric:tabular-nums}
 .notice .livepill svg{color:var(--son);flex:none}
-.notice .livepill .ldot{background:#22a35a;box-shadow:0 0 0 0 #22a35a99}
+.notice .livepill .ldot{background:#79b32e;box-shadow:0 0 0 0 #79b32e99}
 @media(max-width:1023px){.notice .livepill{display:flex}.notice .livepill small{display:none}.notice .livepill .lp{padding:0 10px;gap:6px}.notice .livepill b{font-size:13px}}
 .mkt-ov{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;background:#0b1220b8;backdrop-filter:blur(3px);padding:2.5vh 2vw}
 .mkt-ov.on{display:flex}
@@ -666,7 +666,7 @@ label.f{display:block;font-size:13px;font-weight:600;margin:14px 0 6px;color:var
 .notice .livepill small{color:var(--son-dd);font-weight:800;font-size:11.5px;letter-spacing:.08em}
 .notice .livepill b{color:#c1121f;font-weight:900;font-size:19px}
 .notice .livepill svg{color:var(--son-dd)}
-.notice .livepill .ldot{background:#1f9d4a;box-shadow:0 0 0 3px #1f9d4a33}
+.notice .livepill .ldot{background:#62961d;box-shadow:0 0 0 3px #62961d33}
 /* thanh bên bo tròn, tách mép */
 @media(min-width:1024px){.bar{left:12px;top:12px;bottom:12px;width:calc(var(--side) - 24px);border-radius:18px;border:1px solid #c9a22755;box-shadow:0 10px 30px -14px #0007,inset 0 0 0 1px #ffffff10}}
 /* chân trang chuyên nghiệp */
@@ -682,10 +682,10 @@ label.f{display:block;font-size:13px;font-weight:600;margin:14px 0 6px;color:var
 .fcard .copyr b{color:#ffe36e}
 @media(max-width:700px){.fcard{flex-direction:column;align-items:flex-start;gap:10px}.fcard .copyr{border-left:0;padding-left:0;text-align:left}}
 /* mẫu chữ & số: vàng trên xanh đậm */
-.nt-badge{background:linear-gradient(180deg,#3f7a1c,#2d5c12);color:#ffe36e;font-weight:800;font-size:11px;border-right:2px solid #c9a227}
+.nt-badge{background:linear-gradient(180deg,var(--son-d),var(--son-dd));color:#ffe36e;font-weight:800;font-size:11px;border-right:2px solid #c9a227}
 .nt-badge svg{color:#ffe36e}
 .nt-text{font-weight:700;font-size:13px;color:var(--ink-2)}
-.notice .livepill{background:linear-gradient(180deg,#2f6a14,#234d0e);border-left:2px solid #c9a227;color:#fff}
+.notice .livepill{background:linear-gradient(180deg,var(--son-d),var(--son-dd));border-left:2px solid #c9a227;color:#fff}
 .notice .livepill .lp+.lp{border-left:1px solid #ffffff40}
 .notice .livepill small{color:#fff;font-weight:700;font-size:10.5px;letter-spacing:.07em}
 .notice .livepill b{color:#ffe36e;font-weight:800;font-size:16px}
