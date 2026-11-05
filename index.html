@@ -975,7 +975,7 @@ go();document.addEventListener('DOMContentLoaded',go);
    Trang vẫn xem công khai. Đăng nhập chỉ để mở mục "Quản trị". Quyền do Google Apps Script quyết định
    (kiểm tra mã đăng nhập idToken và danh sách Gmail quản trị), không dựa vào trình duyệt. */
 window.AUTH=(function(){
-  const CFG={apiKey:"",authDomain:"",projectId:"",appId:""};/* TODO: dán cấu hình Firebase (Authentication) của dự án Nghĩa Đô */
+  const CFG={apiKey:"AIzaSyAs6sM05F4kQzcAVSI4g7kaauY6eQTrYYE",authDomain:"nghiado.firebaseapp.com",projectId:"nghiado",appId:"1:895801394197:web:cd4297e10edff96ccafa1c"};
   const V='https://www.gstatic.com/firebasejs/10.12.2/';
   const H=document.documentElement,g=id=>document.getElementById(id);
   let auth=null,user=null,tok='',loading=null,role=null,gen=0;
@@ -1996,7 +1996,7 @@ thBuild();setTimeout(thLoad,1200);
 AUTH.init();
 
 /* ===== Đang online & Tổng truy cập (Firebase Realtime Database) ===== */
-const FB_CFG=null;/* TODO: dán cấu hình Firebase Realtime Database của Nghĩa Đô để bật "Đang online" và "Tổng truy cập" */
+const FB_CFG={apiKey:"AIzaSyAs6sM05F4kQzcAVSI4g7kaauY6eQTrYYE",authDomain:"nghiado.firebaseapp.com",databaseURL:"https://nghiado-default-rtdb.firebaseio.com",projectId:"nghiado",appId:"1:895801394197:web:cd4297e10edff96ccafa1c"};
 (function liveStats(){
   const set=(k,n)=>document.querySelectorAll('[data-live="'+k+'"]').forEach(e=>{e.textContent=nf.format(n)});
   const show=()=>{const a=document.getElementById('liveBar'),b=document.getElementById('livePill');if(a)a.hidden=false;if(b)b.hidden=false};
