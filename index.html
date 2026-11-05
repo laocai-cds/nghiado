@@ -1855,7 +1855,8 @@ function apiBookmarklet(C){
       /* C.pid là mã cấp tỉnh: tìm đúng dòng đơn vị cần lấy rồi đọc mã của nó, lấy danh sách con của chính nó */
       const me=R.list.find(x=>String(x.tenDonVi||'').trim()===C.name);
       if(me){
-        let id=null;for(const k of ['donViId','id','toChucId','orgId','maDonVi','donViID','idDonVi']){if(me[k]!=null&&/^\d{5,}$/.test(String(me[k]))){id=me[k];break}}
+        let id=null;{let dv=me.donVi;if(dv&&typeof dv==='object')dv=dv.id!=null?dv.id:dv.donViId;if(dv!=null&&/^\d{5,}$/.test(String(dv)))id=dv}
+        if(id==null)for(const k of ['donViId','id','toChucId','orgId','maDonVi','donViID','idDonVi']){if(me[k]!=null&&/^\d{5,}$/.test(String(me[k]))){id=me[k];break}}
         if(id==null){for(const k in me){if(/id$/i.test(k)&&/^\d{5,}$/.test(String(me[k]))){id=me[k];break}}}
         if(id==null)throw new Error('Không tìm thấy mã đơn vị của '+C.name+'. Các trường: '+Object.keys(me).join(', '));
         R=await getL(id);
