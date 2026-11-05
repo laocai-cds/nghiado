@@ -1861,7 +1861,7 @@ function apiBookmarklet(C){
         if(id==null)throw new Error('Không tìm thấy mã đơn vị của '+C.name+'. Các trường: '+Object.keys(me).join(', '));
         R=await getL(id);
       }
-      const raw=R.raw,tC=performance.now(),j=null,list=R.list;
+      const raw=R.raw,tC=performance.now(),j=null,list=C.max?R.list.slice(0,C.max):R.list;/* chỉ lấy C.max đơn vị đầu (số 1–33) */
       if(!list.length)throw new Error('API không trả đơn vị nào.');
       if(list.some(x=>/tỉnh Lào Cai/i.test(String(x.tenDonVi||''))||String(x.tenDonVi||'').trim()===C.name))throw new Error('Dữ liệu KHÔNG phải của các chi bộ/đảng bộ trực thuộc '+C.name+' (nhận '+list.length+' đơn vị, đầu tiên: '+(list[0]&&list[0].tenDonVi)+'). Đã dừng, chưa ghi vào Google Sheet.');
       const n=x=>Number(x)||0;
@@ -1893,7 +1893,7 @@ function apiBookmarklet(C){
     }catch(e){say('✕ '+(e&&e.name==='AbortError'?'API phản hồi quá chậm (quá 30 giây). Kiểm tra mạng rồi bấm lại.':e.message)+'   (sau '+f1(performance.now()-T0)+')',true);setTimeout(()=>box.remove(),20000)}
   })();
 }
-function apiBmSrc(){return '('+apiBookmarklet.toString()+')('+JSON.stringify({pid:2122408,name:'Đảng bộ xã Nghĩa Đô',k:'nd_apipw',src:'website-nghia-do-api',m:true,ep:(sheetEndpoint())||''})+');void 0'}
+function apiBmSrc(){return '('+apiBookmarklet.toString()+')('+JSON.stringify({pid:2122408,name:'Đảng bộ xã Nghĩa Đô',max:33,k:'nd_apipw',src:'website-nghia-do-api',m:true,ep:(sheetEndpoint())||''})+');void 0'}
 (function(){
   const a=document.getElementById('apiBm'),c=document.getElementById('apiCopy'),cj=document.getElementById('apiCopyJs'),m=document.getElementById('apiMsg');if(!a)return;
   const say=t=>{m.hidden=false;m.textContent=t};
