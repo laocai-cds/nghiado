@@ -987,7 +987,7 @@ window.AUTH=(function(){
     b.title=role==='admin'?'Đã đăng nhập: '+((user&&user.email)||'')+'. Bấm để đăng xuất':'Đăng nhập quản trị bằng Gmail'}
   function setRole(r){
     role=r;H.classList.toggle('is-admin',r==='admin');paint();
-    try{r==='admin'?localStorage.setItem('bt_adm','1'):localStorage.removeItem('bt_adm')}catch(_){}
+    try{r==='admin'?localStorage.setItem('nd_adm','1'):localStorage.removeItem('nd_adm')}catch(_){}
     if(r==='admin'){if(location.hash==='#import')page('import',true);if(window.admLoad)admLoad()}
     else{const on=document.querySelector('.page.on');if(on&&on.id==='import')page('overview')}
   }
@@ -1028,7 +1028,7 @@ window.AUTH=(function(){
   const fresh=()=>user?user.getIdToken().then(t=>{tok=t;return t}).catch(()=>tok):Promise.resolve('');
   function init(){
     const b=g('loginBtn');if(b)b.onclick=()=>role==='admin'?logout():login();
-    let hint=false;try{hint=localStorage.getItem('bt_adm')==='1'}catch(_){}
+    let hint=false;try{hint=localStorage.getItem('nd_adm')==='1'}catch(_){}
     if(hint){const go=()=>ensure().catch(()=>{});if('requestIdleCallback' in window)requestIdleCallback(go,{timeout:4000});else setTimeout(go,2000)}
     setInterval(()=>{if(user&&!document.hidden)fresh()},10*60*1000);
     document.addEventListener('visibilitychange',()=>{if(!document.hidden)fresh()});
@@ -1065,17 +1065,17 @@ const cls=r=>v(r,'due')>0&&v(r,'paidCount')>=v(r,'due')?'complete':v(r,'paidCoun
 function status(r){const c=cls(r);if(c==='complete')return['Đã hoàn thành','done'];if(c==='partial')return['Đang thu','partial'];if(v(r,'members')>0)return['Chưa phát sinh','empty'];return['Chưa cập nhật','empty']}
 
 let units=[],rankOf=new Map(),pendingRows=[],pendingHeaders=[],dataStamp='—',dataSrc='backup';
-let payments=[];try{payments=JSON.parse(localStorage.getItem('bt_payments')||'[]')}catch(e){}
+let payments=[];try{payments=JSON.parse(localStorage.getItem('nd_payments')||'[]')}catch(e){}
 const state={filter:'all',sort:{k:'rank',dir:1},played:false};
 
 // ---- Đọc số liệu từ Google Sheet (Apps Script doGet?action=read) ----
 const SHEET_EP_DEFAULT='https://script.google.com/macros/s/AKfycbyA58Z6sF1diN5q_xLTRW8Eb7z6RHBB6sODiluiw3dqWDDIORLV84BD4VMm07c2YHs6gg/exec';// dán URL Web App /exec ở đây để mọi người mở trang đều đọc từ Google Sheet
-function sheetEndpoint(){let e='';try{e=localStorage.getItem('bt_endpoint')||''}catch(_){}const r=normEndpoint(SHEET_EP_DEFAULT||e);return r.url||null}
+function sheetEndpoint(){let e='';try{e=localStorage.getItem('nd_endpoint')||''}catch(_){}const r=normEndpoint(SHEET_EP_DEFAULT||e);return r.url||null}
 function jsonp(url,ms){return new Promise((res,rej)=>{const cb='__bt_'+Date.now()+Math.random().toString(36).slice(2),sc=document.createElement('script');let ok=false;
   const fin=(e,v)=>{clearTimeout(tm);delete window[cb];sc.remove();e?rej(e):res(v)};const tm=setTimeout(()=>fin(new Error('timeout')),ms||12000);
   window[cb]=d=>{ok=true;fin(null,d)};sc.onerror=()=>fin(new Error('load'));sc.src=url+(url.includes('?')?'&':'?')+'callback='+cb+'&t='+Date.now();document.head.appendChild(sc)})}
 const nkey=x=>String(x||'').toLocaleLowerCase('vi').replace(/[^\p{L}\p{N}]+/gu,'');
-let liveStale=false,liveUnits=[],viewKey=null,msnap={};try{msnap=JSON.parse(localStorage.getItem('bt_msnap')||'{}')||{}}catch(_){}
+let liveStale=false,liveUnits=[],viewKey=null,msnap={};try{msnap=JSON.parse(localStorage.getItem('nd_msnap')||'{}')||{}}catch(_){}
 const curKey=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')};
 const viewingPast=()=>!!(viewKey&&viewKey!==curKey()&&msnap[viewKey]);
 function applyView(){const src=viewingPast()?msnap[viewKey].rows:liveUnits;
@@ -1107,7 +1107,7 @@ async function loadFromSheet(){const ep=sheetEndpoint();if(!ep){dataSrc='backup'
     if(d&&d.ok)hit=applySheet(d);
     if(!hit){stale=true;d=await jsonp(ep+'?action=read');if(!d||!d.ok)return done({state:'bad'});hit=applySheet(d)}
     liveStale=stale&&!!hit;setTimeout(staleNote,0);
-    if(hit){try{localStorage.setItem('bt_cache',JSON.stringify({headers:d.headers,rows:d.rows,lastSync:d.lastSync||null,t:Date.now()}))}catch(_){}}
+    if(hit){try{localStorage.setItem('nd_cache',JSON.stringify({headers:d.headers,rows:d.rows,lastSync:d.lastSync||null,t:Date.now()}))}catch(_){}}
     return done(hit?{state:'ok',hit,lastSync:d.lastSync}:{state:'empty',lastSync:d.lastSync})}catch(e){return done({state:'fail'})}}
 /* trạng thái đang tải / số liệu dự phòng */
 const BACKUP_STAMP='21/10/2026';
@@ -1120,7 +1120,7 @@ const MONTH_Y0=2026;// năm 2026 giữ tên sheet Thang1…Thang12; các năm kh
 const monthTab=k=>'Thang'+(+k.slice(5))+(+k.slice(0,4)===MONTH_Y0?'':'-'+k.slice(0,4));
 const MCOLS=['STT','Tên đơn vị','Tổng sl đảng viên (1)','Số lượng ĐV sinh hoạt chính thức (2)','Số lượng ĐV sinh hoạt tạm thời (3)','Số lượng ĐV đã chuyển sinh hoạt đảng tạm thời (4)','Số lượng được miễn giảm ĐP (5)','Chưa duyệt (6)','Đã duyệt, chưa nộp (7)','Đã duyệt, đã nộp (8)','Số đảng viên chưa có hồ sơ (9)','Tổng tiền theo hồ sơ đã khai báo','Tổng tiền đã nộp','Tỷ lệ hoàn thành\n đảng phí thực tế'];
 const MGROUP=['STT','Tên đơn vị','Đảng viên','','','','','Hồ sơ đảng phí','','','','Số tiền','',''];
-let monthly={};try{monthly=JSON.parse(localStorage.getItem('bt_monthly')||'{}')||{}}catch(_){}
+let monthly={};try{monthly=JSON.parse(localStorage.getItem('nd_monthly')||'{}')||{}}catch(_){}
 const mkey=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
 const mshort=n=>n>=1e6?(Math.round(n/1e5)/10).toLocaleString('vi-VN')+' tr':n>=1e3?Math.round(n/1e3).toLocaleString('vi-VN')+' k':String(n);
 function monthlySeries(year){/* mỗi sheet tháng là số đã nộp của riêng kỳ tháng đó (API lọc kỳ nộp 01 → cuối tháng) */
@@ -1173,7 +1173,7 @@ async function loadMonthTab(k){const ep=sheetEndpoint();if(!ep||msnap[k])return 
       if(M&&(k===curKey()||sigOf(M.next)!==sigOf(liveUnits))){msnap[k]={t:d.lastSync?new Date(d.lastSync).getTime()||Date.now():Date.now(),rows:M.next};
         monthly[k]={cum:M.next.reduce((a,r)=>a+v(r,'paid'),0)};saveMonthly();return true}}}catch(_){}
   return false}
-function saveMonthly(){try{localStorage.setItem('bt_msnap',JSON.stringify(msnap));localStorage.setItem('bt_monthly',JSON.stringify(monthly))}catch(_){}}
+function saveMonthly(){try{localStorage.setItem('nd_msnap',JSON.stringify(msnap));localStorage.setItem('nd_monthly',JSON.stringify(monthly))}catch(_){}}
 async function syncMonthly(){
   const ep=sheetEndpoint();if(!ep)return;
   let remote=null;
@@ -1184,9 +1184,9 @@ async function syncMonthly(){
   {const live=sigOf(liveUnits),cur=curKey();Object.keys(msnap).forEach(k=>{if(k!==cur&&sigOf(msnap[k].rows)===live){delete msnap[k];delete monthly[k];purged++}});
    const lc=totals().paid;(remote||[]).forEach(r=>{const k=String(r[0]||'').trim(),c=pnum(r[1]);if(/^\d{4}-\d{2}$/.test(k)&&c>=0){if(!(k in monthly)){if(k!==cur&&c===lc&&!msnap[k]){purged++;return}monthly[k]={cum:c}}else if(k!==cur&&monthly[k].cum!==c){monthly[k]={cum:c};delete msnap[k];upd++}}});
    if(purged||upd)saveMonthly()}
-  {const cur0=curKey();let tried={};try{tried=JSON.parse(localStorage.getItem('bt_mtried')||'{}')||{}}catch(_){}
+  {const cur0=curKey();let tried={};try{tried=JSON.parse(localStorage.getItem('nd_mtried')||'{}')||{}}catch(_){}
    const now=Date.now(),want=Object.keys(monthly).filter(k=>k!==cur0&&!msnap[k]&&k<cur0&&!(tried[k]&&now-tried[k]<864e5));
-   if(want.length)Promise.all(want.map(async k=>{const ok=await loadMonthTab(k);if(!ok){tried[k]=Date.now();try{localStorage.setItem('bt_mtried',JSON.stringify(tried))}catch(_){}}return ok})).then(r=>{if(r.some(Boolean))renderMonthly()})}
+   if(want.length)Promise.all(want.map(async k=>{const ok=await loadMonthTab(k);if(!ok){tried[k]=Date.now();try{localStorage.setItem('nd_mtried',JSON.stringify(tried))}catch(_){}}return ok})).then(r=>{if(r.some(Boolean))renderMonthly()})}
   const ck=mkey(new Date()),cum=totals().paid;
   const snapNow=JSON.stringify(liveUnits);
   const changed=!msnap[ck]||JSON.stringify(msnap[ck].rows)!==snapNow||!monthly[ck]||monthly[ck].cum!==cum;
@@ -1200,9 +1200,9 @@ try{const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggl
 document.addEventListener('visibilitychange',()=>document.documentElement.classList.toggle('nanim',document.hidden));
 function start(){
   liveUnits=[...INITIAL_UNITS];applyView();fillSyncMonth();
-  try{$('#endpoint').value=localStorage.getItem('bt_endpoint')||'';$('#syncToken').value=localStorage.getItem('bt_token')||''}catch(e){}
+  try{$('#endpoint').value=localStorage.getItem('nd_endpoint')||'';$('#syncToken').value=localStorage.getItem('nd_token')||''}catch(e){}
   const hasEp=!!sheetEndpoint();let cached=null;
-  try{cached=JSON.parse(localStorage.getItem('bt_cache')||'null')}catch(_){}
+  try{cached=JSON.parse(localStorage.getItem('nd_cache')||'null')}catch(_){}
   if(hasEp&&cached&&Array.isArray(cached.headers)&&applySheet({ok:true,headers:cached.headers,rows:cached.rows,lastSync:cached.lastSync})){dataSrc='cache'}
   else{dataSrc=hasEp?'loading':'backup';if(hasEp)setLoading(true);else showBackupNote(true)}
   render();
@@ -1476,7 +1476,7 @@ $('#savePayment').onclick=()=>{
   const unit=$('#unitSelect').value,amount=Number($('#amount').value),receipt=$('#receipt').value.trim();
   if(!amount||amount<1){toast('Nhập số tiền lớn hơn 0 để lưu giao dịch.');$('#amount').focus();return}
   payments.push({unit,amount,receipt,date:new Date().toISOString()});
-  try{localStorage.setItem('bt_payments',JSON.stringify(payments))}catch(e){}
+  try{localStorage.setItem('nd_payments',JSON.stringify(payments))}catch(e){}
   closeModal();$('#amount').value='';$('#receipt').value='';renderTx();
   toast('Đã lưu giao dịch trên thiết bị này.');
 };
@@ -1590,10 +1590,10 @@ function openReportDialog(){
 
 /* ===== Thông báo chạy ===== */
 const NT_CLOUD=true,NT_TAB='Thông báo',NT_DEF={msg:'Đề nghị các chi bộ, đảng bộ cơ sở nộp đảng phí đầy đủ, đúng hạn hằng tháng.',color:'#12335c',size:'13.5',speed:'90'};
-let ntCfg={...NT_DEF};try{Object.assign(ntCfg,JSON.parse(localStorage.getItem('bt_notice')||'{}'))}catch(_){}
+let ntCfg={...NT_DEF};try{Object.assign(ntCfg,JSON.parse(localStorage.getItem('nd_notice')||'{}'))}catch(_){}
 function ntApply(){const t=$('#ntText');if(!t)return;t.textContent=ntCfg.msg||NT_DEF.msg;t.style.color=ntCfg.color;t.style.fontSize=ntCfg.size+'px';
   const w=$('#ntTrack').clientWidth||800;requestAnimationFrame(()=>{const len=t.scrollWidth+w;t.parentNode.style.setProperty('--nt-d',Math.max(12,len/(+ntCfg.speed||90))+'s');t.style.setProperty('--nt-d',Math.max(12,len/(+ntCfg.speed||90))+'s')})}
-function ntStore(){try{localStorage.setItem('bt_notice',JSON.stringify(ntCfg))}catch(_){}}
+function ntStore(){try{localStorage.setItem('nd_notice',JSON.stringify(ntCfg))}catch(_){}}
 async function ntLoad(){const ep=sheetEndpoint();if(!NT_CLOUD||!ep)return;
   try{const d=await jsonp(ep+'?action=read&tab='+encodeURIComponent(NT_TAB),9000);
     const r=d&&d.ok&&Array.isArray(d.rows)&&d.rows[0];
@@ -1601,7 +1601,7 @@ async function ntLoad(){const ep=sheetEndpoint();if(!NT_CLOUD||!ep)return;
 function ntPrev(){const p=$('#ntPrev');p.textContent=$('#ntInput').value.trim()||NT_DEF.msg;p.style.color=$('#ntColor').value;p.style.fontSize=$('#ntSize').value+'px'}
 function ntOpen(){if(!AUTH.isAdmin()){AUTH.ask();return}
   $('#ntInput').value=ntCfg.msg;$('#ntColor').value=ntCfg.color;$('#ntSize').value=ntCfg.size;$('#ntSpeed').value=ntCfg.speed;
-  try{$('#ntToken').value=localStorage.getItem('bt_token')||''}catch(_){}$('#ntMsg').textContent='';$('#ntMsg').className='fieldmsg';ntPrev();$('#ntModal').classList.add('on');$('#ntInput').focus()}
+  try{$('#ntToken').value=localStorage.getItem('nd_token')||''}catch(_){}$('#ntMsg').textContent='';$('#ntMsg').className='fieldmsg';ntPrev();$('#ntModal').classList.add('on');$('#ntInput').focus()}
 function ntClose(){$('#ntModal').classList.remove('on')}
 $('#ntSet').onclick=ntOpen;$('#ntCancel').onclick=ntClose;
 $('#ntModal').addEventListener('click',e=>{if(e.target.id==='ntModal')ntClose()});
@@ -1624,7 +1624,7 @@ $('#ntSave').onclick=async()=>{const msg=$('#ntInput').value.trim(),m=$('#ntMsg'
     try{const d=await jsonp(ep+'?action=read&tab='+encodeURIComponent(NT_TAB),9000);const r=d&&d.ok&&Array.isArray(d.rows)&&d.rows[0];ok=!!(r&&String(r[4]||'')!==base&&String(r[0]||'').trim()===cfg.msg&&String(r[1]||'')===cfg.color&&String(r[2]||'')===cfg.size&&String(r[3]||'')===cfg.speed)}catch(_){}
   }
   btn.disabled=false;btn.textContent=old;
-  if(ok){try{localStorage.setItem('bt_token',tk)}catch(_){}ntCfg=cfg;ntStore();ntApply();toast('Đã lưu thông báo lên Google Sheet.');ntClose()}
+  if(ok){try{localStorage.setItem('nd_token',tk)}catch(_){}ntCfg=cfg;ntStore();ntApply();toast('Đã lưu thông báo lên Google Sheet.');ntClose()}
   else bad('Chưa lưu được lên Google Sheet. Kiểm tra mã đồng bộ (mã tạo bởi setupSheet() trong Apps Script Nghĩa Đô) rồi thử lại.')};
 ntApply();setTimeout(ntLoad,1500);
 $('#reportBtn').onclick=openReportDialog;
@@ -1728,13 +1728,13 @@ function showSheetLink(){const u=($('#sheetUrl').value||'').trim(),a=$('#openShe
 ['#endpoint','#syncToken'].forEach(i=>$(i).addEventListener('input',checkEndpoint));
 $('#sheetUrl').addEventListener('input',showSheetLink);
 $('#showTok').onclick=()=>{const t=$('#syncToken');const h=t.type==='password';t.type=h?'text':'password';$('#showTok').textContent=h?'Ẩn':'Hiện'};
-try{$('#sheetUrl').value=localStorage.getItem('bt_sheet')||''}catch(e){}
+try{$('#sheetUrl').value=localStorage.getItem('nd_sheet')||''}catch(e){}
 checkEndpoint();showSheetLink();
 $('#saveEndpoint').onclick=()=>{
   const url=checkEndpoint();
   if($('#endpoint').value.trim()&&!url){toast('URL chưa đúng, xem hướng dẫn dưới ô nhập.');return}
   if(url)$('#endpoint').value=url;
-  try{localStorage.setItem('bt_endpoint',$('#endpoint').value.trim());localStorage.setItem('bt_token',$('#syncToken').value.trim());localStorage.setItem('bt_sheet',$('#sheetUrl').value.trim())}catch(e){}
+  try{localStorage.setItem('nd_endpoint',$('#endpoint').value.trim());localStorage.setItem('nd_token',$('#syncToken').value.trim());localStorage.setItem('nd_sheet',$('#sheetUrl').value.trim())}catch(e){}
   showSheetLink();checkEndpoint();toast('Đã lưu cấu hình trên thiết bị này.');
 };
 // Kiểm tra kết nối: gọi JSONP (không gửi mã đồng bộ). Script cũ có thể không hỗ trợ nên chỉ báo mức độ chắc chắn.
@@ -1879,7 +1879,7 @@ function apiBookmarklet(C){
     }catch(e){say('✕ '+(e&&e.name==='AbortError'?'API phản hồi quá chậm (quá 30 giây). Kiểm tra mạng rồi bấm lại.':e.message)+'   (sau '+f1(performance.now()-T0)+')',true);setTimeout(()=>box.remove(),20000)}
   })();
 }
-function apiBmSrc(){return '('+apiBookmarklet.toString()+')('+JSON.stringify({pid:2124775,name:'Đảng bộ xã Nghĩa Đô',k:'bt_apipw',src:'website-nghia-do-api',m:true,ep:(sheetEndpoint())||''})+');void 0'}
+function apiBmSrc(){return '('+apiBookmarklet.toString()+')('+JSON.stringify({pid:2124775,name:'Đảng bộ xã Nghĩa Đô',k:'nd_apipw',src:'website-nghia-do-api',m:true,ep:(sheetEndpoint())||''})+');void 0'}
 (function(){
   const a=document.getElementById('apiBm'),c=document.getElementById('apiCopy'),cj=document.getElementById('apiCopyJs'),m=document.getElementById('apiMsg');if(!a)return;
   const say=t=>{m.hidden=false;m.textContent=t};
@@ -2005,7 +2005,7 @@ const FB_CFG={apiKey:"AIzaSyAs6sM05F4kQzcAVSI4g7kaauY6eQTrYYE",authDomain:"nghia
   const base='https://www.gstatic.com/firebasejs/10.12.2/';
   const go=()=>load(base+'firebase-app-compat.js').then(()=>load(base+'firebase-database-compat.js')).then(()=>{
     firebase.initializeApp(FB_CFG);const db=firebase.database();
-    let sid='';try{sid=sessionStorage.getItem('bt_sid')||'';if(!sid){sid=Math.random().toString(36).slice(2,10)+Date.now().toString(36);sessionStorage.setItem('bt_sid',sid)}}catch(_){sid=Math.random().toString(36).slice(2,10)}
+    let sid='';try{sid=sessionStorage.getItem('nd_sid')||'';if(!sid){sid=Math.random().toString(36).slice(2,10)+Date.now().toString(36);sessionStorage.setItem('nd_sid',sid)}}catch(_){sid=Math.random().toString(36).slice(2,10)}
     const me=db.ref('presence/'+sid),vr=db.ref('stats/visits'),pr=db.ref('presence');
     // Chỉ hiện số đã được máy chủ xác nhận (không dùng giá trị tạm trên máy khách)
     let pOn=false,vOn=false;
@@ -2015,8 +2015,8 @@ const FB_CFG={apiKey:"AIzaSyAs6sM05F4kQzcAVSI4g7kaauY6eQTrYYE",authDomain:"nghia
     db.ref('.info/connected').on('value',s=>{if(s.val()===true){
       me.onDisconnect().remove().then(()=>me.set(true)).then(startPresence).catch(()=>{});
     }});
-    let counted=false;try{counted=sessionStorage.getItem('bt_counted')==='1'}catch(_){}
-    if(!counted){vr.transaction(n=>(n||0)+1,(err,committed)=>{if(!err&&committed){try{sessionStorage.setItem('bt_counted','1')}catch(_){}startVisits()}})}
+    let counted=false;try{counted=sessionStorage.getItem('nd_counted')==='1'}catch(_){}
+    if(!counted){vr.transaction(n=>(n||0)+1,(err,committed)=>{if(!err&&committed){try{sessionStorage.setItem('nd_counted','1')}catch(_){}startVisits()}})}
     else{vr.get().then(()=>startVisits()).catch(()=>{})}
   }).catch(()=>{});
   if(!FB_CFG)return;
