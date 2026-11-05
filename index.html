@@ -812,6 +812,7 @@ go();document.addEventListener('DOMContentLoaded',go);
           <button class="chip" data-filter="all" aria-pressed="true">Tất cả</button>
           <button class="chip" data-filter="has" aria-pressed="false">Có phát sinh</button>
           <button class="chip" data-filter="need" aria-pressed="false">Còn cần theo dõi</button>
+          <button class="chip" data-filter="zero" aria-pressed="false">Đảng viên 0/0</button>
         </div>
       </div>
       <div class="tw"><table>
@@ -1352,7 +1353,7 @@ const rk=r=>{const n=rankOf.get(r);return `<span class="rk ${n<=3?'m'+n:cls(r)}"
 const zc=(x,c)=>x>0?`<td class="n ${c}">${x}</td>`:'<td class="n zero">0</td>';
 function fillTables(){
   const q=($('#search').value||'').toLocaleLowerCase('vi'),f=state.filter;
-  let list=units.filter(r=>nm(r).toLocaleLowerCase('vi').includes(q)).filter(r=>f==='all'||(f==='has'?v(r,'members')>0:(v(r,'pending')+v(r,'noRecord')+v(r,'approved')>0||v(r,'progress')<1)));
+  let list=units.filter(r=>nm(r).toLocaleLowerCase('vi').includes(q)).filter(r=>f==='all'||(f==='zero'?(v(r,'due')===0&&v(r,'paidCount')===0):f==='has'?v(r,'members')>0:(v(r,'pending')+v(r,'noRecord')+v(r,'approved')>0||v(r,'progress')<1)));
   list=sorted(list);
   $('#rowcount').textContent=`Hiển thị ${list.length} / ${units.length} đơn vị`;
   $('#noresult').hidden=list.length>0;
