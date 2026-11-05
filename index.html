@@ -242,7 +242,7 @@ a{color:var(--son)}
 .mdelta span.up{color:#1f7a3d}.mdelta span.dn{color:#c1121f}
 .msum{margin:10px 0 2px;padding:9px 12px;border-radius:10px;background:#f3f8e8;border:1px solid #dbe6c2;color:var(--son-dd);font-size:13px;line-height:1.5}
 .msum b{font-weight:800}.msum .up{color:#1f7a3d}.msum .dn{color:#c1121f}
-@media(max-width:700px){.mdelta{gap:4px}.mdelta span{font-size:9px}}
+@media(max-width:700px){.mdelta{gap:4px}.mdelta span{font-size:10px;overflow:visible}.mdelta span:not(.s){visibility:hidden}}
 .mcol:focus-visible{outline:2px solid var(--son);outline-offset:2px}
 .mlab{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:8px;margin-top:7px;font-size:11px;color:var(--muted);text-align:center}
 .mlab .sel{color:var(--son);font-weight:700}.mlab .cur{color:#8a6b0f}
@@ -1215,7 +1215,7 @@ function renderMonthly(){
   el.querySelectorAll('.mcol').forEach(b=>b.onclick=()=>pickMonth(+b.dataset.m));
   let lab=$('#monthLab');if(!lab){lab=document.createElement('div');lab.id='monthLab';lab.className='mlab';el.after(lab)}
   lab.innerHTML=S.map(x=>`<span class="${x.m===selMonth?'sel':''}${x.k===ck?' cur':''}">T${x.m}</span>`).join('');
-  const dl=S.map((x,i)=>{const p=[...S.slice(0,i)].filter(z=>z.has).pop();if(!x.has||!p||p.v<=0)return'<span>·</span>';const d=(x.v-p.v)/p.v*100;return`<span class="${d>=0?'up':'dn'}" title="So với T${p.m}">${d>=0?'▲':'▼'}${Math.abs(d).toFixed(0)}%</span>`});
+  const dl=S.map((x,i)=>{const p=[...S.slice(0,i)].filter(z=>z.has).pop();if(!x.has||!p||p.v<=0)return'<span>·</span>';const d=(x.v-p.v)/p.v*100;const ad=Math.abs(d);return`<span class="${d>=0?'up':'dn'}${x.m===selMonth?' s':''}" title="So với T${p.m}">${d>=0?'▲':'▼'}${ad>999?'>999':ad.toFixed(0)}%</span>`});
   let dr=$('#monthDelta');if(!dr){dr=document.createElement('div');dr.id='monthDelta';dr.className='mdelta';lab.after(dr)}
   dr.innerHTML=dl.join('');
   let sm=$('#monthSum');if(!sm){sm=document.createElement('div');sm.id='monthSum';sm.className='msum';dr.after(sm)}
