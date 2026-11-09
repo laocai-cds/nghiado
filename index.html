@@ -1561,7 +1561,7 @@ function render(){
   const t=totals(),rate=t.due?t.paidCount/t.due:0;
   const active=units.filter(r=>v(r,'members')>0),done=units.filter(r=>cls(r)==='complete').length;
 
-  $('#heroline').innerHTML=`<div><b>${money(t.paid)}</b><small>Đã thu</small></div><div><b>${t.paidCount}/${t.due}</b><small>Đảng viên đã nộp</small></div><div><b>${done}/${units.length}</b><small>Đơn vị hoàn thành</small></div><div><b>${dataSrc==='loading'?'…':(dataStamp||'—')}</b><small>${dataSrc==='sheet'?'Google Sheet cập nhật':'Dữ liệu cập nhật'}</small></div>`;
+  $('#heroline').innerHTML=`<div><b>${money(t.paid)}</b><small>Đã thu</small></div><div><b>${t.paidCount}/${t.due}</b><small>Đảng viên đã nộp</small></div><div class="hl-rank"><b>${done}/${units.length}</b><small>Đơn vị hoàn thành</small><button type="button" class="kp-more" data-rank-open title="Xem bảng xếp hạng đơn vị">Xếp hạng<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></button></div><div><b>${dataSrc==='loading'?'…':(dataStamp||'—')}</b><small>${dataSrc==='sheet'?'Google Sheet cập nhật':'Dữ liệu cập nhật'}</small></div>`;
   {const hd=$('#heroDate');if(hd){const d=new Date();hd.textContent='Ngày '+d.getDate()+' tháng '+(d.getMonth()+1)+' năm '+d.getFullYear()}}
   renderDonut(t,rate,active);renderMonthly();renderBanner();
 
@@ -3170,5 +3170,81 @@ document.addEventListener('keydown',function(e){var o=ov();if(e.key==='Escape'&&
 })();
 </script>
 <script src="xa-bar.js"></script>
+<div class="back" id="rankModal" role="dialog" aria-modal="true" aria-labelledby="rankTitle">
+  <div class="modal rk-modal">
+    <div class="rkm-head"><div><h3 id="rankTitle">Xếp hạng đơn vị</h3><p id="rankSub">Xếp theo tiến độ; đồng hạng thì xét số tiền đã nộp</p></div><button type="button" class="rkm-x" data-rank-close aria-label="Đóng">×</button></div>
+    <div class="rkm-sum" id="rankSum"></div>
+    <div class="rkm-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" id="rankQ" placeholder="Tìm tên đơn vị…" autocomplete="off" aria-label="Tìm tên đơn vị"><span id="rankCnt"></span><button type="button" class="rkm-clear" id="rankClr" aria-label="Xóa tìm kiếm" title="Xóa tìm kiếm" hidden>×</button></div>
+    <div class="rkm-list" id="rankList"></div>
+    <p class="rkm-foot">Xếp theo tiến độ nộp đảng phí của từng đơn vị.</p>
+  </div>
+</div>
+<style id="rankModalCss">/* Si Ma Cai: nút "Xem tiếp" và cửa sổ xếp hạng đơn vị */
+.kp-mini.k5 small{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}.kp-mini.k5 small .kp-more{margin-left:auto;white-space:nowrap;flex:none}
+.kp-more{display:inline-flex;align-items:center;gap:4px;margin-left:0;white-space:nowrap;padding:2px 9px;border:1px solid #fed7aa;border-radius:999px;background:#fff7ed;color:#b45309;font:700 12px/1.5 var(--display);cursor:pointer;vertical-align:1px;transition:background .15s,border-color .15s}
+.kp-more svg{width:13px;height:13px;transition:transform .15s}
+.kp-more:hover{background:#ffedd5;border-color:#fdba74}.kp-more:hover svg{transform:translateX(2px)}
+.kp-more:focus-visible{outline:2px solid #d97706;outline-offset:2px}
+.modal.rk-modal{width:min(720px,100%);padding:0;border-top:4px solid #d97706;display:flex;flex-direction:column;max-height:calc(100dvh - 40px);overflow:hidden}
+.rkm-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:20px 22px 12px}
+.rkm-head h3{margin:0;font:800 19px/1.3 var(--display);color:var(--ink)}
+.rkm-head p{margin:4px 0 0;font-size:13px;color:var(--muted)}
+.rkm-x{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--rule);background:#fff;font-size:20px;line-height:1;color:var(--muted);cursor:pointer}
+.rkm-x:hover{background:#fff7ed;color:#b45309;border-color:#fdba74}
+.rkm-search{position:relative;display:flex;align-items:center;margin:12px 22px 10px}
+.rkm-search svg{position:absolute;left:12px;width:17px;height:17px;color:var(--muted);pointer-events:none}
+.rkm-search input{width:100%;height:38px;padding:0 64px 0 38px;border:1px solid var(--rule);border-radius:999px;background:#fff;font:500 14px var(--display);color:var(--ink);outline:0}
+.rkm-search input:focus{border-color:#d97706;box-shadow:0 0 0 3px rgba(217,119,6,.15)}
+.rkm-search input::-webkit-search-cancel-button{display:none}
+.rkm-search span{position:absolute;right:14px;font-size:12px;font-weight:700;color:#b45309}
+.rkm-search input{padding-right:82px!important}.rkm-search #rankCnt{right:44px!important}
+.rkm-clear{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:26px;height:26px;border:0;border-radius:50%;background:#f1f3f5;color:#6b7280;font-size:18px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0;transition:background .15s,color .15s}
+.rkm-clear:hover{background:#fee2e2;color:#b91c1c}.rkm-clear[hidden]{display:none}
+.rkm-row[hidden]{display:none!important}.rkm-none{margin:0;padding:22px;text-align:center;color:var(--muted);font-size:13.5px}
+.rkm-sum{display:flex;flex-wrap:wrap;gap:8px;padding:0 22px 12px;border-bottom:1px solid var(--rule)}
+.rkm-sum span{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;font-size:12.5px;font-weight:600;background:var(--c-bg);color:var(--c)}
+.rkm-sum span b{font-weight:800}
+.rkm-list{overflow-y:auto;overscroll-behavior:contain;padding:6px 14px 6px}
+.rkm-row{display:grid;grid-template-columns:34px minmax(0,1fr) minmax(120px,190px) 70px;align-items:center;gap:12px;padding:10px 8px;border-bottom:1px dashed var(--rule-2,#eceef1)}
+.rkm-row:last-child{border-bottom:0}
+.rkm-row:hover{background:#fffaf3;border-radius:10px}
+.rkm-nm{min-width:0}
+.rkm-nm .uname{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-weight:700;font-size:14px;line-height:1.3;color:var(--ink)}
+.rkm-nm small{display:block;margin-top:2px;font-size:12px;color:var(--muted)}
+.rkm-bar{display:flex;align-items:center;gap:8px}
+.rkm-bar i{flex:1;height:7px;border-radius:7px;background:#eef0f3;overflow:hidden}
+.rkm-bar i b{display:block;height:100%;border-radius:7px;background:var(--c)}
+.rkm-bar em{flex:none;width:52px;text-align:right;font-style:normal;font-weight:800;font-size:13px;color:var(--c)}
+.rkm-ct{text-align:right;font-size:12.5px;color:var(--muted)}.rkm-ct b{color:var(--ink);font-size:13.5px}
+.rkm-foot{margin:0;padding:10px 22px 14px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--muted)}
+@media(max-width:560px){.rkm-row{grid-template-columns:30px minmax(0,1fr) 64px;gap:8px}.rkm-bar{grid-column:2/4;grid-row:2}.rkm-ct{grid-column:3;grid-row:1}}
+</style>
+<style id="rankBtnCss">
+html body .heroline>.hl-rank .kp-more{display:inline-flex;align-items:center;gap:5px;margin:8px 0 0;padding:4px 11px;border:1px solid #ffd84d99;border-radius:999px;background:#ffd84d26;color:#ffe27a;font:700 11.5px/1.3 var(--display,inherit);cursor:pointer;white-space:nowrap;transition:background .2s,box-shadow .2s,transform .2s}
+html body .heroline>.hl-rank .kp-more:hover{background:linear-gradient(135deg,#ffd84d,#ffb800);color:#3a2a06;box-shadow:0 0 14px #ffc21a99;transform:scale(1.05)}
+html body .heroline>.hl-rank .kp-more svg{width:13px;height:13px;transition:transform .2s}
+html body .heroline>.hl-rank .kp-more:hover svg{transform:translateX(3px)}
+</style>
+<script>(()=>{const M=document.getElementById('rankModal');if(!M)return;
+const C={complete:['#15803d','#f0fdf4'],partial:['#b45309','#fff7ed'],empty:['#b91c1c','#fef2f2']};
+function open(){const L=units.filter(r=>v(r,'members')>0).sort((a,b)=>(rankOf.get(a)||999)-(rankOf.get(b)||999));
+ const n={complete:0,partial:0,empty:0};L.forEach(r=>{const c=cls(r);n[c in n?c:'empty']++});
+ document.getElementById('rankSum').innerHTML=[['complete','Hoàn thành'],['partial','Đang thu'],['empty','Chưa phát sinh']].map(([k,l])=>`<span style="--c:${C[k][0]};--c-bg:${C[k][1]}">${l} <b>${n[k]}</b></span>`).join('');
+ document.getElementById('rankList').innerHTML=L.map(r=>{const c=cls(r),col=(C[c]||C.empty)[0],p=Math.max(0,Math.min(1,v(r,'progress')));
+  return `<div class="rkm-row">${rk(r)}<div class="rkm-nm"><span class="uname">${esc(nm(r))}</span><small>${esc(status(r)[0])} · ${money(v(r,'paid'))}</small></div><div class="rkm-bar" style="--c:${col}"><i><b style="width:${(p*100).toFixed(1)}%"></b></i><em>${pct(p)}</em></div><div class="rkm-ct"><b>${num(v(r,'paidCount'))}</b>/${num(v(r,'due'))}<br>đảng viên</div></div>`}).join('')||'<p class="empty">Chưa có số liệu đơn vị.</p>';
+ const q=document.getElementById('rankQ');q.value='';filt();
+ M.classList.add('on');document.body.style.overflow='hidden';setTimeout(()=>q.focus(),30)}
+function fold(x){return String(x).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d')}
+function filt(){const k=fold(document.getElementById('rankQ').value.trim());let n=0;const rows=document.querySelectorAll('#rankList .rkm-row');rows.forEach(r=>{const ok=!k||fold(r.querySelector('.uname').textContent).includes(k);r.hidden=!ok;if(ok)n++});
+ document.getElementById('rankCnt').textContent=k?n+'/'+rows.length:'';document.getElementById('rankClr').hidden=!document.getElementById('rankQ').value;let e=document.getElementById('rankNone');if(!e){e=document.createElement('p');e.id='rankNone';e.className='rkm-none';e.textContent='Không tìm thấy đơn vị phù hợp.';document.getElementById('rankList').after(e)}e.hidden=!(k&&!n)}
+document.getElementById('rankQ').addEventListener('input',filt);
+document.getElementById('rankClr').addEventListener('click',()=>{const q=document.getElementById('rankQ');q.value='';filt();q.focus()});
+function close(){M.classList.remove('on');document.body.style.overflow=''}
+document.addEventListener('click',e=>{const t=e.target;if(!t.closest)return;
+ if(t.closest('[data-rank-open]')){e.preventDefault();open();return}
+ if(t.closest('[data-rank-close]')||t===M){close();return}
+ if(M.classList.contains('on')&&false)close()},true);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&M.classList.contains('on'))close()});
+})();</script>
 </body>
 </html>
